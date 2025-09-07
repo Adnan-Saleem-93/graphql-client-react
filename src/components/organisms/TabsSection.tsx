@@ -1,4 +1,7 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
+import GamesTab from '../pages/GamesTab'
+import ReviewsTab from '../pages/ReviewsTab'
+import AuthorsTab from '../pages/AuthorsTab'
 
 export default function TabsSection() {
   return (
@@ -10,13 +13,19 @@ export default function TabsSection() {
         <TabsTrigger value="reviews" className="w-full">
           Reviews
         </TabsTrigger>
-        <TabsTrigger value="users" className="w-full">
-          Users
+        <TabsTrigger value="authors" className="w-full">
+          Authors
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="games">Make changes to your account here.</TabsContent>
-      <TabsContent value="reviews">Change your password here.</TabsContent>
-      <TabsContent value="users">.</TabsContent>
+      <TabsContent value="games">
+        <GamesTab />
+      </TabsContent>
+      <TabsContent value="reviews">
+        <ReviewsTab />
+      </TabsContent>
+      <TabsContent value="authors">
+        <AuthorsTab />
+      </TabsContent>
     </Tabs>
   )
 }

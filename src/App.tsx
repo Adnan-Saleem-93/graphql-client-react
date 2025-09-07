@@ -1,5 +1,5 @@
 import './App.css'
-import TabsSection from './components/TabsSection'
+import TabsSection from './components/organisms/TabsSection'
 
 function App() {
   return (
