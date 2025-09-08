@@ -1,8 +1,6 @@
 import type {GameType} from '@/lib/type'
 import {gql} from '@apollo/client'
 import {useQuery} from '@apollo/client/react'
-import CustomTable from '../organisms/Table'
-import {TableCell, TableRow} from '../ui/table'
 
 type GamesData = {
   games: GameType[]
@@ -16,39 +14,35 @@ export default function GamesTab() {
           id
           title
           platform
+          cover
         }
       }
     `
   )
-
-  const renderData = () => {
-    if (data?.games.length) {
-      return data?.games.map((cell) => {
-        return (
-          <TableRow key={`game-${cell.id}`}>
-            <TableCell>{cell.id}</TableCell>
-            <TableCell>{cell.title}</TableCell>
-            <TableCell>{cell.platform.join(', ')}</TableCell>
-          </TableRow>
-        )
-      })
-    } else {
-      return (
-        <TableRow>
-          <TableCell className="font-normal text-center text-xl" colSpan={3}>
-            No games found
-          </TableCell>
-        </TableRow>
-      )
-    }
-  }
 
   return (
     <div className="w-full h-full">
       {loading ? (
         <p>Loading...</p>
       ) : data?.games && data.games.length > 0 ? (
-        <CustomTable columns={['ID', 'Title', 'Platform']} renderData={renderData} />
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+          {data.games.map((game) => (
+            <div
+              key={`game-${game.id}`}
+              className="flex hover:bg-neutral-100 cursor-pointer flex-col justify-center items-center gap-y-2 ring ring-gray-200 p-4"
+            >
+              <img
+                src={
+                  game.cover ||
+                  'https://vglist.co/packs/media/images/no-cover-369ad8f0ea82dde5923c942ba1a26482.png'
+                }
+                alt="game-cover"
+                className="object-cover w-full h-full rounded-md"
+              />
+              <h5 className="text-lg font-medium">{game.title}</h5>
+            </div>
+          ))}
+        </div>
       ) : (
         error && <p>{error.message}</p>
       )}

@@ -3,6 +3,7 @@ export type GameType = {
   title: string
   platform: string[]
   reviews: ReviewType[]
+  cover?: string
 }
 export type ReviewType = {
   id: string
